@@ -38,9 +38,7 @@ fn main() -> Result<(), String> {
         .create_texture_target(PixelFormatEnum::RGBA8888, BOX_SIZE, BOX_SIZE)
         .map_err(|e| e.to_string())?;
 
-
     'mainloop: loop {
-
         // The context event pump contains all the posible events that can
         // happen within the window. These include pressed keys, mouse movement,
         // mouse clicks, quit events, etc.
