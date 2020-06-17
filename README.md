@@ -5,7 +5,7 @@
 To run the examples in each part it is important to install the SDL2 libraries in your
 system. In Linux and iOS that can be accomplished using the corresponding package manager.
 
-However, to use SDL2 in windows one how to download the 
+However, to use SDL2 in windows one has to download the 
 [compiled files](https://www.libsdl.org/download-2.0.php) and place them
 in a location where cargo and the executable file can find them. The dll files have to 
 be seen by the executable the lib files have to be seen by cargo
