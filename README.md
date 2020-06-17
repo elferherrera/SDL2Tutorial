@@ -8,7 +8,7 @@ system. In Linux and iOS that can be accomplished using the corresponding packag
 However, to use SDL2 in windows one has to download the 
 [compiled files](https://www.libsdl.org/download-2.0.php) and place them
 in a location where cargo and the executable file can find them. The dll files have to 
-be seen by the executable the lib files have to be seen by cargo
+be seen by the executable create by cargo and the lib files have to be seen by cargo itself.
 The next steps can be used to create a folder with the files available to cargo:
 
 1. Create "dll" folder in HOMEPATH.
