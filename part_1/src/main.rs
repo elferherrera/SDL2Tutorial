@@ -3,6 +3,7 @@ use sdl2::keyboard::Keycode;
 use sdl2::pixels::{Color, PixelFormatEnum};
 use sdl2::rect::{Rect, Point};
 
+const WINDOW_NAME: &str = "boxes";
 const WINDOW_HEIGHT: u32 = 200;
 const WINDOW_WIDTH: u32 = 300;
 const BOX_SIZE: u32 = 40;
@@ -12,7 +13,7 @@ fn main() -> Result<(), String> {
     let video = ctx.video()?;
 
     let window = video
-        .window("tetris", WINDOW_WIDTH, WINDOW_HEIGHT)
+        .window(WINDOW_NAME, WINDOW_WIDTH, WINDOW_HEIGHT)
         .position_centered()
         .build()
         .map_err(|e| e.to_string())?;
@@ -74,14 +75,32 @@ fn main() -> Result<(), String> {
         canvas
             .with_texture_canvas(&mut box_target, |texture| {
 
+                // Selecting gray color to box and painting all
+                // the box with that color
                 texture.set_draw_color(Color::RGB(100, 100, 100));
                 texture.clear();
 
+                // Changing color to red to draw a rectangle in the
+                // texture
                 texture.set_draw_color(Color::RGB(250, 0, 0));
-
                 texture
                     .draw_rect(Rect::new(1, 1, BOX_SIZE - 2, BOX_SIZE - 2))
                     .expect("Unable to draw box");
+
+                // Changing color to black to draw two lines that
+                // cross the texture
+                texture.set_draw_color(Color::RGB(0, 0, 0));
+                texture
+                    .draw_line(
+                        Point::new(0, 0), 
+                        Point::new(BOX_SIZE as i32, BOX_SIZE as i32))
+                    .expect("Unable to draw line");
+
+                texture
+                    .draw_line(
+                        Point::new(BOX_SIZE as i32, 0), 
+                        Point::new(0, BOX_SIZE as i32))
+                    .expect("Unable to draw line");
 
             })
             .map_err(|e| e.to_string())?;

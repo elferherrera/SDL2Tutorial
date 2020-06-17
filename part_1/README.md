@@ -1,4 +1,8 @@
-# Part 1
+# Part 1: Drawing in canvas
 
-In this part of the tutorial two boxes are drawn by creating a texture
-and copying the result to the canvas using the copy and copy_ex methods.
+In this part of the tutorial two boxes are drawn by creating a texture and
+copying the result to the canvas using the copy and copy_ex methods.
+
+The running application also prints all the events that could happen while the
+window is open. Some of these events are the pressed keys and the mouse
+movements.
