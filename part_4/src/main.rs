@@ -8,8 +8,8 @@ use std::time::Duration;
 const WINDOW_HEIGHT: u32 = 480;
 const WINDOW_WIDTH: u32 = 640;
 
-// This constansts should be part of the Player struct, but since they are
-// not going to be changed at run time it makes sense to keep them as constants
+// These constansts should be part of the Player struct, but since they are
+// not going to be changed at run time it makes sense to keep them as const
 const FILE_NAME: &str = "assets/characters.bmp";
 const FRAMES_PER_ANIM: i32 = 4;
 const NUMBER_CHARACTERS: i32 = 3;
@@ -17,7 +17,7 @@ const SPRITE_TILE_SIZE: u32 = 32;
 const STEP_SIZE: i32 = 10;
 
 // This example uses a bitmap located in the folder assets. The bitmap has 12 drawings that
-// corresponds to different characters (NUMBER_CHARACTERS) and their possible positions
+// corresponds to different characters (NUMBER_CHARACTERS) and their possible animations
 // (FRAMES_PER_ANIM). Each position is bounded by a box os 32 by 32 pixels (SPRITE_TILE_SIZE).
 
 // For this example, all the logic is placed in a Player struct
@@ -72,10 +72,10 @@ impl Player {
         // Change to the next frame in animation
         self.change_frame();
 
-        // The horizontal destination is controlled by changing the values X values
+        // The horizontal destination is controlled by changing the horizontal values
         // in the destination box. In order to avoid a character to be drawn outside
-        // the window, the actual position is compared and the new value depends on
-        // whether the character is outside the window or  not.
+        // the window, the actual position is compared with the window borders and the 
+        // new value depends on whether the character is outside the window or not.
         self.destination.0 = if (self.destination.0 + (SPRITE_TILE_SIZE as i32 * self.size_incrememt)) > WINDOW_WIDTH as i32 {
             (WINDOW_WIDTH - (SPRITE_TILE_SIZE * self.size_incrememt as u32)) as i32
         } else {
@@ -92,10 +92,10 @@ impl Player {
         // Change to the next frame in animation
         self.change_frame();
 
-        // The horizontal destination is controlled by changing the values X values
+        // The horizontal destination is controlled by changing the horizontal values
         // in the destination box. In order to avoid a character to be drawn outside
-        // the window, the actual position is compared and the new value depends on
-        // whether the character is outside the window or  not.
+        // the window, the actual position is compared with the window borders and the 
+        // new value depends on whether the character is outside the window or not.
         self.destination.0 = if (self.destination.0 - self.size_incrememt as i32) < 0 {
             0
         } else {
@@ -245,7 +245,7 @@ fn main() -> Result<(), String> {
         canvas.set_draw_color(sdl2::pixels::Color::RGBA(0, 0, 0, 255));
         canvas.clear();
 
-        // copy the frame to the canvas
+        // copy the texture to the canvas
         canvas.copy_ex(
             &texture,
             player.create_source(),
