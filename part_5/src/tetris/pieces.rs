@@ -1,4 +1,4 @@
-use crate::tetris::Shapes::{self, ShapeS, ShapeE, ShapeZ, ShapeT, ShapeL, ShapeR};
+use crate::tetris::Shapes::{self, ShapeE, ShapeL, ShapeR, ShapeS, ShapeT, ShapeZ};
 
 type Piece = Vec<Vec<Shapes>>;
 type States = Vec<Piece>;
@@ -10,7 +10,6 @@ pub struct TetrisPiece {
     pub y_pos: u32,
     pub current_state: usize,
 }
-
 
 pub trait CreatePiece {
     fn new() -> TetrisPiece;
@@ -132,14 +131,12 @@ pub struct TetrisR;
 impl CreatePiece for TetrisR {
     fn new() -> TetrisPiece {
         TetrisPiece {
-            states: vec![
-                vec![
-                    vec![ShapeR, ShapeR, ShapeE, ShapeE],
-                    vec![ShapeR, ShapeR, ShapeE, ShapeE],
-                    vec![ShapeE, ShapeE, ShapeE, ShapeE],
-                    vec![ShapeE, ShapeE, ShapeE, ShapeE],
-                ],
-            ],
+            states: vec![vec![
+                vec![ShapeR, ShapeR, ShapeE, ShapeE],
+                vec![ShapeR, ShapeR, ShapeE, ShapeE],
+                vec![ShapeE, ShapeE, ShapeE, ShapeE],
+                vec![ShapeE, ShapeE, ShapeE, ShapeE],
+            ]],
             x_pos: 4,
             y_pos: 0,
             current_state: 0,

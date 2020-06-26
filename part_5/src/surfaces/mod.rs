@@ -21,7 +21,6 @@ const NEXT_AREA_BOX: u32 = 20;
 const NEXT_AREA_PAD_X: i32 = 10;
 const NEXT_AREA_PAD_Y: i32 = 30;
 
-
 // Struct to contain all the textures that will be used during the game.
 // The textures are stored like this to avoid computing them all the time
 // and also to practice a bit with lifetimes and references.
@@ -92,24 +91,22 @@ impl<'a> TextureManager<'a> {
         self.canvas.set_draw_color(Color::RGB(10, 10, 10));
         self.canvas.clear();
 
-        // Drawing the area for the next piece 
+        // Drawing the area for the next piece
         // In this rectangle the next piece is going to be shown
         self.canvas.set_draw_color(Color::RGB(200, 200, 200));
-        self.canvas
-            .fill_rect(
-                Rect::new(
-                    NEXT_AREA_X, 
-                    NEXT_AREA_Y, 
-                    NEXT_AREA_WIDTH, 
-                    NEXT_AREA_HEIGHT,
-                )
-            )?;
+        self.canvas.fill_rect(Rect::new(
+            NEXT_AREA_X,
+            NEXT_AREA_Y,
+            NEXT_AREA_WIDTH,
+            NEXT_AREA_HEIGHT,
+        ))?;
 
         // Drawing the next piece in the area for next piece
-        for (i, line) in tetris.next_piece.states[0].iter().enumerate(){
+        for (i, line) in tetris.next_piece.states[0].iter().enumerate() {
             for (j, col) in line.iter().enumerate() {
-
-                if *col == Shapes::ShapeE { continue };
+                if *col == Shapes::ShapeE {
+                    continue;
+                };
 
                 let delta_x = NEXT_AREA_BOX as i32 * j as i32;
                 let delta_y = NEXT_AREA_BOX as i32 * i as i32;
@@ -123,10 +120,9 @@ impl<'a> TextureManager<'a> {
                         NEXT_AREA_PAD_X + NEXT_AREA_X as i32 + delta_x,
                         NEXT_AREA_PAD_Y + NEXT_AREA_Y as i32 + delta_y,
                         NEXT_AREA_BOX,
-                        NEXT_AREA_BOX
+                        NEXT_AREA_BOX,
                     ),
                 )?;
-
             }
         }
 
@@ -142,12 +138,7 @@ impl<'a> TextureManager<'a> {
                 self.canvas.copy(
                     &self.board_textures[col],
                     None,
-                    Rect::new(
-                        MARGIN_X + delta_x,
-                        MARGIN_Y + delta_y,
-                        BOX_SIZE,
-                        BOX_SIZE
-                    ),
+                    Rect::new(MARGIN_X + delta_x, MARGIN_Y + delta_y, BOX_SIZE, BOX_SIZE),
                 )?;
             }
         }
@@ -162,7 +153,6 @@ impl<'a> TextureManager<'a> {
 
         for (i, line) in current_piece.states[current_state].iter().enumerate() {
             for (j, col) in line.iter().enumerate() {
-
                 match col {
                     Shapes::ShapeE => continue,
                     _ => {
@@ -175,14 +165,8 @@ impl<'a> TextureManager<'a> {
                         self.canvas.copy(
                             &self.board_textures[col],
                             None,
-                            Rect::new(
-                                MARGIN_X + delta_x, 
-                                MARGIN_Y + delta_y, 
-                                BOX_SIZE, 
-                                BOX_SIZE
-                            ),
+                            Rect::new(MARGIN_X + delta_x, MARGIN_Y + delta_y, BOX_SIZE, BOX_SIZE),
                         )?;
-
                     }
                 }
             }

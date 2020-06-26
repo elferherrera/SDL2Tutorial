@@ -1,6 +1,8 @@
 pub mod surfaces;
 pub mod tetris;
 
+use std::time::Instant;
+
 const WINDOW_NAME: &str = "Tetris";
 const WINDOW_HEIGHT: u32 = 800;
 const WINDOW_WIDTH: u32 = 600;
@@ -34,11 +36,14 @@ fn main() -> Result<(), String> {
     let mut tetris = tetris::Tetris::new();
 
     let mut event_pump = ctx.event_pump()?;
+    let timer = Instant::now();
 
     while tetris.running {
-        tetris.manage_events(&mut event_pump);
+        tetris.manage_events(&mut event_pump, &timer);
         textures.draw_game(&tetris)?;
     }
+
+    println!("Game over!\n Your score is: {}", tetris.score);
 
     Ok(())
 }
